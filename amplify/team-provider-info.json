@@ -10,6 +10,11 @@
       "StackName": "amplify-nextonelogincognito-main-164322",
       "StackId": "arn:aws:cloudformation:eu-west-1:791385305479:stack/amplify-nextonelogincognito-main-164322/cfe9a570-00fb-11ec-bc72-066b77039e79",
       "AmplifyAppId": "d3tzy4gtgm37nl"
+    },
+    "categories": {
+      "auth": {
+        "nextonelogincognito": {}
+      }
     }
   }
 }

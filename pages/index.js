@@ -1,5 +1,8 @@
-import { Auth, Hub } from 'aws-amplify';
+import Amplify, { Auth, Hub } from 'aws-amplify';
 import {Component} from "react";
+import awsconfig from '../aws-exports';
+
+Amplify.configure(awsconfig);
 
 class App extends Component {
   state = { user: null, customState: null };
