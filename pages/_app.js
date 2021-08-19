@@ -2,7 +2,8 @@ import '../styles/globals.css';
 import Amplify, { Auth } from 'aws-amplify';
 import awsconfig from '../aws-exports';
 
-const environment = process.env.NODE_ENV || 'development';
+const environment = process.env.NODE_ENV;
+console.log(environment);
 
 const [
   productionRedirectSignIn,
