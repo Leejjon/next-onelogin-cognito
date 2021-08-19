@@ -1,7 +1,6 @@
 import '../styles/globals.css';
 import Amplify, { Auth } from 'aws-amplify';
 import awsconfig from '../aws-exports';
-import {env} from "eslint-config-next";
 
 const environment = process.env.NODE_ENV || 'development';
 
