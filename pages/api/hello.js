@@ -22,5 +22,16 @@ Auth.configure(awsconfig);
 
 export default async function handler(req, res) {
   console.log("You and me baby ain't nothing but mammals.");
-  res.status(200).json({ name: 'John Doe', requestHeaders: JSON.stringify(req.headers)});
+
+  let data;
+  let user;
+  try {
+    user = await Auth.currentAuthenticatedUser();
+    console.log('user is authenticated');
+    // fetch some data and assign it to the data variable
+  } catch (err) {
+    console.log('error: no authenticated user');
+  }
+
+  res.status(200).json({ name: 'John Doe', requestHeaders: JSON.stringify(req.headers), user: user, data: data});
 }

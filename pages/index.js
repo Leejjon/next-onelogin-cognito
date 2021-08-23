@@ -1,8 +1,8 @@
-import {API, Auth, Hub} from 'aws-amplify';
+import {API, Auth, Cache, Hub} from 'aws-amplify';
 import {Component} from "react";
 
 class App extends Component {
-    state = {user: null, customState: null};
+    state = {user: null, customState: null, token: null};
 
     componentDidMount() {
         Hub.listen("auth", ({payload: {event, data}}) => {
@@ -20,13 +20,18 @@ class App extends Component {
         });
 
         Auth.currentAuthenticatedUser()
-            .then(user => this.setState({user}))
+            .then(user => {
+                // Run this after the sign-in
+                const federatedInfo = Cache.getItem('federatedInfo');
+                const { token } = federatedInfo;
+                this.setState({user: user, token: token});
+            })
             .catch(() => console.log("Not signed in"));
     }
 
     fetchBackend() {
 
-        fetch('/api/hello')
+        fetch('/api/hello', )
             .then(response => response.json())
             .then(data => console.log('Resonse from hello API: ' + data));
     }
