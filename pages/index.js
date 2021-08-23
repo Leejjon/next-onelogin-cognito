@@ -33,7 +33,7 @@ class App extends Component {
 
         fetch('/api/hello', )
             .then(response => response.json())
-            .then(data => console.log('Resonse from hello API: ' + data));
+            .then(data => console.log('Resonse from hello API: ' + JSON.stringify(data)));
     }
 
     render() {

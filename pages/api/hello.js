@@ -33,5 +33,5 @@ export default async function handler(req, res) {
     console.log('error: no authenticated user');
   }
 
-  res.status(200).json({ name: 'John Doe', requestHeaders: JSON.stringify(req.headers), user: user, data: data});
+  res.status(200).json({ name: 'John Doe', requestHeaders: JSON.stringify(req.headers), user: user, data: data, ok: "ok"});
 }
