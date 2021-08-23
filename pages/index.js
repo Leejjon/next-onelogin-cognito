@@ -1,4 +1,4 @@
-import {Auth, Hub} from 'aws-amplify';
+import {API, Auth, Hub} from 'aws-amplify';
 import {Component} from "react";
 
 class App extends Component {
@@ -24,6 +24,7 @@ class App extends Component {
     }
 
     fetchBackend() {
+
         fetch('/api/hello')
             .then(response => response.json())
             .then(data => console.log(data));
