@@ -1,50 +1,54 @@
-import Amplify, { Auth, Hub } from 'aws-amplify';
+import {Auth, Hub} from 'aws-amplify';
 import {Component} from "react";
-import awsconfig from '../aws-exports';
-
-// Amplify.configure(awsconfig);
 
 class App extends Component {
-  state = { user: null, customState: null };
+    state = {user: null, customState: null};
 
-  componentDidMount() {
-    Hub.listen("auth", ({ payload: { event, data } }) => {
-      switch (event) {
-        case "signIn":
-          this.setState({ user: data });
-          break;
-        case "signOut":
-          this.setState({ user: null });
-          break;
-        case "customOAuthState":
-          this.setState({ customState: data });
-      }
-    });
+    componentDidMount() {
+        Hub.listen("auth", ({payload: {event, data}}) => {
+            switch (event) {
+                case "signIn":
+                    this.setState({user: data});
+                    break;
+                case "signOut":
+                    this.setState({user: null});
+                    break;
+                case "customOAuthState":
+                    this.setState({customState: data});
+            }
+        });
 
-    Auth.currentAuthenticatedUser()
-        .then(user => this.setState({ user }))
-        .catch(() => console.log("Not signed in"));
-  }
+        Auth.currentAuthenticatedUser()
+            .then(user => this.setState({user}))
+            .catch(() => console.log("Not signed in"));
+    }
 
-  render() {
-    const { user } = this.state;
+    fetchBackend() {
+        console.log('Hello world.');
+        fetch('/hello')
+            .then()
+    }
 
-    return (
-        <div className="App">
-          <button onClick={() => Auth.federatedSignIn()}>Open Hosted UI</button>
-          <SignOutButton user={user} />
+    render() {
+        const {user} = this.state;
 
-        </div>
-    );
-  }
+        return (
+            <div className="App">
+                <button onClick={() => Auth.federatedSignIn()}>Open Hosted UI</button>
+                <button onClick={() => this.fetchBackend()}>Call backend</button>
+                <SignOutButton user={user}/>
+
+            </div>
+        );
+    }
 }
 
 const SignOutButton = (props) => {
-  if (props.user) {
-    return (<button onClick={() => Auth.signOut()}>Sign Out {props.user.getUsername()}</button>);
-  } else {
-    return (<div>Not logged in</div>);
-  }
+    if (props.user) {
+        return (<button onClick={() => Auth.signOut()}>Sign Out {props.user.getUsername()}</button>);
+    } else {
+        return (<div>Not logged in</div>);
+    }
 }
 
 export default App;
