@@ -8,7 +8,7 @@ class App extends Component {
         Hub.listen("auth", ({payload: {event, data}}) => {
             switch (event) {
                 case "signIn":
-                    console.log('Resonse from sign-in' + data);
+                    console.log('Resonse from sign-in' + JSON.stringify(data));
                     this.setState({user: data});
                     break;
                 case "signOut":

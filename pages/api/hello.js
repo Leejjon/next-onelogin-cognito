@@ -5,20 +5,20 @@ import awsconfig from "../../aws-exports";
 
 // Just following https://github.com/aws-amplify/amplify-js/pull/8309
 
-// Amplify.configure({
+Amplify.configure({
 //   Logging: {
 //     logGroupName: 'css-amplify-test',
 //     logStreamName: 'just-one-stream'
 //   },
-//   ...awsconfig,
-//   ssr: true}
-// );
+  ...awsconfig,
+  ssr: true
+});
 //
 // const logger = new Logger('hello');
 // Amplify.register(logger);
 // logger.addPluggable(new AWSCloudWatchProvider());
 //
-// Auth.configure(awsconfig);
+Auth.configure(awsconfig);
 
 export default async function handler(req, res) {
   console.log("You and me baby ain't nothing but mammals.");
