@@ -8,6 +8,7 @@ class App extends Component {
         Hub.listen("auth", ({payload: {event, data}}) => {
             switch (event) {
                 case "signIn":
+                    console.log('Resonse from sign-in' + data);
                     this.setState({user: data});
                     break;
                 case "signOut":
@@ -27,7 +28,7 @@ class App extends Component {
 
         fetch('/api/hello')
             .then(response => response.json())
-            .then(data => console.log(data));
+            .then(data => console.log('Resonse from hello API: ' + data));
     }
 
     render() {
