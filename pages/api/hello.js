@@ -1,27 +1,15 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 
-import Amplify, {Auth, AWSCloudWatchProvider, Logger, withSSRContext} from "aws-amplify";
-import awsconfig from "../../aws-exports";
+import Amplify, { withSSRContext } from "aws-amplify";
+import config from "../../aws-exports.js";
 
 // Just following https://github.com/aws-amplify/amplify-js/pull/8309
+// pages/api/profile.js
 
-Amplify.configure({
-//   Logging: {
-//     logGroupName: 'css-amplify-test',
-//     logStreamName: 'just-one-stream'
-//   },
-  ...awsconfig,
-  ssr: true
-});
-//
-// const logger = new Logger('hello');
-// Amplify.register(logger);
-// logger.addPluggable(new AWSCloudWatchProvider());
-//
-Auth.configure(awsconfig);
-
-export default async function handler(req, res) {
-  console.log("You and me baby ain't nothing but mammals.");
+// Amplify SSR configuration needs to be done within each API route
+Amplify.configure({ ...config, ssr: true });
+export default async (req, res) => {
+  const { Auth } = withSSRContext({ req });
 
   let data;
   let user;
@@ -33,5 +21,9 @@ export default async function handler(req, res) {
     console.log('error: no authenticated user');
   }
 
-  res.status(200).json({ name: 'John Doe', requestHeaders: JSON.stringify(req.headers), user: user, data: data, ok: "ok"});
+  res.statusCode = 200;
+  res.json({
+    data: data ? data : null,
+    username: user ? user.username : null
+  })
 }
