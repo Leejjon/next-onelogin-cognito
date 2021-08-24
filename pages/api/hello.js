@@ -13,17 +13,22 @@ export default async (req, res) => {
 
   let data;
   let user;
+  res.statusCode = 200;
   try {
     user = await Auth.currentAuthenticatedUser();
     console.log('user is authenticated');
     // fetch some data and assign it to the data variable
+    res.json({
+      data: data ? data : null,
+      username: user ? user.username : null,
+    });
   } catch (err) {
     console.log('error: no authenticated user');
+    res.json({
+      data: data ? data : null,
+      username: user ? user.username : null,
+      req: JSON.stringify(req.headers),
+      err: err
+    });
   }
-
-  res.statusCode = 200;
-  res.json({
-    data: data ? data : null,
-    username: user ? user.username : null
-  })
 }
