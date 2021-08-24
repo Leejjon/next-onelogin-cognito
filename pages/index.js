@@ -1,8 +1,8 @@
 import Amplify, {Auth, Hub} from 'aws-amplify';
 import {Component} from "react";
 import config from "../aws-exports.js";
-//
-// Amplify.configure({ ...config, ssr: true });
+
+Amplify.configure({ ...config, ssr: true });
 
 class App extends Component {
     state = {user: null, customState: null, token: null};
