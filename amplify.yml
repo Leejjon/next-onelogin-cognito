@@ -12,6 +12,8 @@ frontend:
         - npm ci
     build:
       commands:
+        - ls -l
+        - cat aws-exports.js
         - npm run build
   artifacts:
     baseDirectory: .next
