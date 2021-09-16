@@ -12,7 +12,7 @@ frontend:
         - npm ci
     build:
       commands:
-        - ls
+        - ls -l
         - npm run build
   artifacts:
     baseDirectory: .next
