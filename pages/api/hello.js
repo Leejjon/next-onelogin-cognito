@@ -21,5 +21,6 @@ export default async (req, res) => {
   res.statusCode = 200;
   res.json({
     username: user ? user.username : null,
+    req: JSON.stringify(req.headers)
   });
 }
